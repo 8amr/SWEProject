@@ -1,4 +1,9 @@
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import org.apache.bcel.generic.InstructionTargeter;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class IndexEngine {
 	static IndexCard[]cards = new IndexCard[40];;
@@ -21,17 +26,44 @@ public class IndexEngine {
 
 
 
-	public static int search_by_paper(Paper paper){
-		int indexId=-1;
+	public static int[] search_by_paper(Paper paper){
+		ArrayList<Integer> temp = new ArrayList<Integer>();
+
 		for(int i=0;i<maxIndexId;i++){
 			if(cards[i].getPaper().equals(paper)){
-				indexId = i;
-				break;
+				temp.add(i);
 			}
 		}
-		return indexId;
-		//Arrays.sort(cards);
-		//return Arrays.binarySearch(cards,paper);
+
+		int[] rersult = ArrayUtils.toPrimitive(temp.toArray(new Integer[temp.size()]));
+		return rersult;
+		
+	}
+	
+	public static int[] search_by_text(String text){
+		ArrayList<Integer> temp = new ArrayList<Integer>();
+
+		for(int i=0;i<maxIndexId;i++){
+			if(cards[i].getText().equals(text)){
+				temp.add(i);
+			}
+		}
+
+		int[] rersult = ArrayUtils.toPrimitive(temp.toArray(new Integer[temp.size()]));
+		return rersult;
+		
+	}
+	
+	public static int[] search_by_category(String  category){
+		ArrayList<Integer> temp = new ArrayList<Integer>();
+		for(int i=0;i<maxIndexId;i++){
+			if(cards[i].getCategory().equals(category)){
+				temp.add(i);
+			}
+		}
+
+		int[] rersult = ArrayUtils.toPrimitive(temp.toArray(new Integer[temp.size()]));
+		return rersult;
 		
 	}
 	
