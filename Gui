@@ -1,0 +1,87 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+public class Gui {
+	
+	JFrame mainFrame = new JFrame("SWE");
+	public Gui(){
+		mainFrame.add(new TabbedPane());
+		mainFrame.setVisible(true);
+		mainFrame.setSize(800,500);
+
+	}
+}
+
+
+class TabbedPane extends JPanel {
+	static Object[][] data ;
+	static String[] columnNames = {"Number",
+            "File Name",
+            "Publishing Date","Publisher"};
+	static JTable table = new JTable(data, columnNames);
+	static DefaultTableModel model;
+
+    
+    public TabbedPane() {
+        super(new GridLayout(1, 1));
+        
+        JTabbedPane tabbedPane = new JTabbedPane();
+        JComponent homePanel = new JPanel(new GridLayout(2,1));
+        JPanel innerTopPanle = new JPanel(new FlowLayout());
+        JButton browseButton = new JButton("Browse (folder)");
+        // btn function 
+        browseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+					Main.openChoser();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            }
+        });
+        
+        innerTopPanle.add(browseButton);
+        tabbedPane.addTab("Home",homePanel);
+        JPanel innerButomPanel = new JPanel(new BorderLayout(1,0));
+        table = new JTable(data, columnNames);
+        table.setPreferredScrollableViewportSize(new Dimension(500, 100));
+        table.setFillsViewportHeight(true);
+    	model = new DefaultTableModel(data, columnNames);
+        table.setModel(model);
+        //Create the scroll pane and add the table to it.
+        JScrollPane scrollPane = new JScrollPane(table);
+        innerButomPanel.add(scrollPane);
+        homePanel.add(innerTopPanle);
+        homePanel.add(innerButomPanel);
+        //// end of home page 
+        JComponent refPanel = new JPanel(new FlowLayout());
+        tabbedPane.addTab("Ref",refPanel);
+
+        
+        JComponent cardsPanel = new JPanel(new BorderLayout());
+        tabbedPane.addTab("Cards",cardsPanel);
+   
+        
+        //Add the tabbed pane to this panel.
+        add(tabbedPane);
+        
+        //The following line enables to use scrolling tabs.
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        
+        
+    }
+    
+   
+    
+
+}
