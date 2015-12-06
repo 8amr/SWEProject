@@ -1,0 +1,70 @@
+
+public class IndexCard extends IndexEngine implements Comparable{
+	String text;
+	String category;
+	Paper paper;
+	int indexId;
+	IndexCard(String text,String category,Paper paper){
+		this.text=text;
+		this.paper = paper;
+		this.category = category;
+		this.indexId = IndexEngine.getMaxIndexId();
+		IndexEngine.maxIndexId++;
+		IndexEngine.cards[indexId] =this;
+	}
+	
+	
+	public void edit_card(String newText){
+		//// replace old text 
+		this.text = newText;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public Paper getPaper() {
+		return paper;
+	}
+
+	public void setPaper(Paper paper) {
+		this.paper = paper;
+	}
+
+	public int getIndexId() {
+		return indexId;
+	}
+
+	
+	
+	public String toString(){
+		return paper.getNewName()+" :"+text+indexId;
+	}
+
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		IndexCard c = (IndexCard)o;
+		Integer obj1 = new Integer(this.indexId);
+		Integer obj2 = new Integer(c.getIndexId());
+		return obj1.compareTo(obj2);
+	}
+	
+	
+	
+	
+}
+
