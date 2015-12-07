@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Paths;
@@ -23,7 +24,7 @@ import org.apache.pdfbox.util.PDFTextStripper;
 
 
 
-public class Paper{
+public class Paper  implements Serializable{
 	
 	private File paper;
 	private BasicFileAttributes bfa;
@@ -186,6 +187,7 @@ public class Paper{
 	         System.out.println("Error name:"+path);
 	      }
 	}
+	
 
 
 
