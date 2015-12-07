@@ -1,12 +1,13 @@
 import java.awt.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.bcel.generic.InstructionTargeter;
 import org.apache.commons.lang3.ArrayUtils;
 
-public class IndexEngine {
-	static IndexCard[]cards = new IndexCard[40];;
+public class IndexEngine implements Serializable{
+	static IndexCard[]cards = new IndexCard[40];
 	static int maxIndexId=0;
 	public IndexEngine(){
 		
