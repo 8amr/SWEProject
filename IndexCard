@@ -1,12 +1,15 @@
+import java.io.Serializable;
 
 public class IndexCard extends IndexEngine implements Comparable{
 	String text;
 	String category;
-	Paper paper;
+	//Paper paper;
+	//public transient Paper paper;
+	public String PaperName ;
 	int indexId;
-	IndexCard(String text,String category,Paper paper){
+	IndexCard(String text,String category,String paperName){
 		this.text=text;
-		this.paper = paper;
+		this.PaperName = paperName;
 		this.category = category;
 		this.indexId = IndexEngine.getMaxIndexId();
 		IndexEngine.maxIndexId++;
@@ -35,12 +38,12 @@ public class IndexCard extends IndexEngine implements Comparable{
 		this.category = category;
 	}
 
-	public Paper getPaper() {
-		return paper;
+	public String getPaper() {
+		return PaperName;
 	}
 
-	public void setPaper(Paper paper) {
-		this.paper = paper;
+	public void setPaperName(String p) {
+		this.PaperName = p;
 	}
 
 	public int getIndexId() {
@@ -50,7 +53,7 @@ public class IndexCard extends IndexEngine implements Comparable{
 	
 	
 	public String toString(){
-		return paper.getNewName()+" :"+text+indexId;
+		return PaperName+" :"+text+indexId;
 	}
 
 
