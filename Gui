@@ -28,7 +28,10 @@ class TabbedPane extends JPanel {
             "File Name",
             "Publishing Date","Publisher"};
 	static JTable table = new JTable(data, columnNames);
-	static DefaultTableModel model;
+	static DefaultTableModel model = new DefaultTableModel(data, columnNames);
+	static Object[][] categoryData ;
+	static JTable categoryTable = new JTable();
+	static DefaultTableModel categoryModel = new DefaultTableModel(categoryData,new String[] {"Category"});
 
     
     public TabbedPane() {
@@ -53,10 +56,8 @@ class TabbedPane extends JPanel {
         innerTopPanle.add(browseButton);
         tabbedPane.addTab("Home",homePanel);
         JPanel innerButomPanel = new JPanel(new BorderLayout(1,0));
-        table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 100));
         table.setFillsViewportHeight(true);
-    	model = new DefaultTableModel(data, columnNames);
         table.setModel(model);
         //Create the scroll pane and add the table to it.
         JScrollPane scrollPane = new JScrollPane(table);
@@ -66,17 +67,32 @@ class TabbedPane extends JPanel {
         //// end of home page 
         JComponent refPanel = new JPanel(new FlowLayout());
         tabbedPane.addTab("Ref",refPanel);
-
-        
         JComponent cardsPanel = new JPanel(new BorderLayout());
         tabbedPane.addTab("Cards",cardsPanel);
-   
-        
-        //Add the tabbed pane to this panel.
         add(tabbedPane);
         
-        //The following line enables to use scrolling tabs.
-        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        /////start of index tab
+        JPanel cardsCenter = new JPanel();
+        JTextField searchBox = new JTextField();
+        searchBox.setPreferredSize(new Dimension(200,30));
+        cardsCenter.add(searchBox);
+        JButton searchBtn = new JButton("SEARCH");
+        cardsCenter.add(searchBtn,BorderLayout.CENTER);
+        JPanel cardsLeft = new JPanel();
+        cardsLeft.setPreferredSize(new Dimension(100,500));
+        JButton addCardBtn = new JButton("ADD CARD");
+        cardsLeft.add(addCardBtn);
+        
+        	/// start of Category Table 
+        categoryTable.setPreferredScrollableViewportSize(new Dimension(100,400));
+        categoryTable.setFillsViewportHeight(true);
+        categoryTable.setModel(categoryModel);
+        JScrollPane categoryTableScrollPane = new JScrollPane(categoryTable);
+        cardsLeft.add(categoryTableScrollPane);
+        	//// end of table 
+        cardsPanel.add(cardsLeft,BorderLayout.WEST);
+        cardsPanel.add(cardsCenter);
+
         
         
     }
